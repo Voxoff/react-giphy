@@ -4,15 +4,19 @@ import SearchBar from './searchbar.jsx';
 import Gif from './gif.jsx';
 import GifList from './giflist.jsx';
 
+import Giphy from 'giphy-api';
+
 class App extends Component {
   search(){
-
-    gifs = [
-      id="ftevww7vO4QYNoS0Fd",
-      id="ftevww7vO4QYNoS0Fd"
-    ]
+    
+    return gifs
   }
   render(){
+    const gifs = [
+      {id: "ftevww7vO4QYNoS0Fd"},
+      {id: "2rACoX3oXJX1kZceZZ"}
+    ]
+
     return ( 
     <div className="container">
       <div className="left-side">
@@ -22,7 +26,7 @@ class App extends Component {
         </div>
       </div>
       <div className="right-side">
-        <GifList gif="ftevww7vO4QYNoS0Fd" />
+        <GifList gifs={gifs} />
       </div> 
     </div>
     )
