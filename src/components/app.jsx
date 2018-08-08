@@ -1,28 +1,28 @@
-import React, { Component } from 'react'
-
-import SearchBar from './searchbar.jsx';
-import Gif from './gif.jsx';
-import GifList from './giflist.jsx';
-
+import React, { Component } from 'react';
 import giphy from 'giphy-api';
+
+import SearchBar from './searchbar';
+import Gif from './gif';
+import GifList from './giflist';
+
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       gifs: [],
       selectedgif: "ftevww7vO4QYNoS0Fd"
-    }
+    };
   }
 
-  search = (query) => { 
+  search = (query) => {
     giphy('wmt9eubVynqAsZEc3JFDjlxIJuBItIaV')
-    .search({q: query, limit: 5}, (err,res) => {
-      this.setState({
-        gifs: res.data
+      .search({ q: query, limit: 5 }, (err, res) => {
+        this.setState({
+          gifs: res.data
+        });
       });
-    });
   }
 
   selectGif = (id) => {
@@ -31,21 +31,20 @@ class App extends Component {
     });
   }
 
-  render(){
-        // giphy('wmt9eubVynqAsZEc3JFDjlxIJuBItIaV').search('pokemon', function(err,res) {console.log(res.data)})
-    return ( 
-    <div className="container">
-      <div className="left-side">
-        <SearchBar searchFunction={this.search}/>
-        <div className="selected-gif">
-          <Gif id={this.state.selectedgif}/>
+  render() {
+    return (
+      <div className="container">
+        <div className="left-side">
+          <SearchBar searchFunction={this.search} />
+          <div className="selected-gif">
+            <Gif id={this.state.selectedgif} />
+          </div>
+        </div>
+        <div className="right-side">
+          <GifList gifs={this.state.gifs} selectGif={this.selectGif} />
         </div>
       </div>
-      <div className="right-side">
-        <GifList gifs={this.state.gifs} selectGif={this.selectGif}/>
-      </div> 
-    </div>
-    )
+    );
   }
 }
 
